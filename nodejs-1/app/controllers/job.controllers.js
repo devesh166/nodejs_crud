@@ -56,7 +56,7 @@ exports.findAll = (req, res) => {
 }
 
 exports.deleteOne = (req, res) => {
-    jobs.jobs_model.findOneAndDelete({ 'job_id': req.params.noteId }, (err, response) => {
+    jobs.jobs_model.findOneAndDelete({ 'job_id': req.params.id }, (err, response) => {
         if (!response) {
             res.send({ message: "no such data" });
         }
@@ -76,7 +76,7 @@ exports.update = (req, res) => {
         });
     }
 
-    jobs.jobs_model.findOneAndUpdate({ 'job_id': req.params.noteId }, { $set: req.body }, { new: true }, (err, response) => {
+    jobs.jobs_model.findOneAndUpdate({ 'job_id': req.params.id }, { $set: req.body }, { new: true }, (err, response) => {
         if (err) {
             console.log(err);
         }
