@@ -14,13 +14,18 @@ var user_schema = mongoose.Schema({
 var job_schema = mongoose.Schema({
     job_id: { type: Number, require: true },
     job_des: { type: String, require: true },
-    company_name: { type: String, require: true }
+    company_name: { type: String, require: true },
+    loc: {
+        type: { type: Number },
+        coordinates: []
+    }
 }, { versionKey: false });
 
 var Apply_schema = mongoose.Schema({
     user_id: { type: Number, require: true },
     job_id: { type: Number, require: true },
-    job_status: { type: String, require: true }
+    company_name:{type:String, require:true},
+    job_status: { type: Number}
 }, { versionKey: false });
 module.exports = {
     user_model: mongoose.model('user_types', user_schema),

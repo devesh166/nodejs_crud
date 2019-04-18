@@ -1,21 +1,25 @@
 module.exports=(app)=>{
-    const fun=require('../controllers/users.controllers.js');
-    const fun1=require('../controllers/job.controllers.js');
-    app.post('/users/post', fun.create);
+    const users_coll=require('../controllers/users.controllers.js');
+    const jobs_coll=require('../controllers/job.controllers.js');
+    const apply_coll=require('../controllers/apply.controllers.js');
 
-    app.get('/users/read', fun.findAll);
+    //user collection routes
+    app.post('/users/post', users_coll.create);
+    app.get('/users/read', users_coll.findAll);
+    app.delete('/users/:noteId', users_coll.deleteOne);
+    app.put('/users/put/:noteId', users_coll.update);
 
-    app.delete('/users/:noteId', fun.deleteOne);
+    //jobs collection routes
+    app.post('/jobs/post/:id',jobs_coll.create);
+    app.get('/jobs/read', jobs_coll.findAll);
+    app.delete('/jobs/:noteId', jobs_coll.deleteOne);
+    app.put('/jobs/put/:noteId', jobs_coll.update);
 
-    app.put('/users/put/:noteId', fun.update);
-
-    app.post('/jobs/post/:id',fun1.create);
-
-    app.get('/jobs/read', fun1.findAll);
-
-    app.delete('/jobs/:noteId', fun1.deleteOne);
-
-    app.put('/jobs/put/:noteId', fun1.update);
+    //Apply collection routes
+    app.post('/apply/post/:id', apply_coll.create);
+    app.get('/apply/:company_name', apply_coll.findAll);
+    app.get('/apply/:company_name/:user_id', apply_coll.find_user);
+    app.put('/apply/:company_id/:user', apply_coll.update);
 
 }
 
