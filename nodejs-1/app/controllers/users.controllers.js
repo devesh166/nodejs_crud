@@ -12,7 +12,7 @@ exports.create = (req, res) => {
         user_id: req.body.user_id,
         name: req.body.name,
         email: req.body.email,
-        loc:req.body.loc
+        loc: req.body.loc
     });
     data.save((err, response) => {
         if (err) {
@@ -24,58 +24,46 @@ exports.create = (req, res) => {
     })
 }
 
-exports.findAll= (req, res)=>{
-    users.user_model.find((err, data)=>{
-        if(err){
+exports.findAll = (req, res) => {
+    users.user_model.find((err, data) => {
+        if (err) {
             console.log(err);
         }
-        else{
+        else {
             res.send(data);
         }
     })
 
 }
 
-exports.deleteOne=(req, res)=>{
-    users.user_model.findOneAndDelete({'user_id':req.params.noteId}, (err, response)=>{
-        if(!response){
-            res.send({message:"no such data"});
+exports.deleteOne = (req, res) => {
+    users.user_model.findOneAndDelete({ 'user_id': req.params.noteId }, (err, response) => {
+        if (!response) {
+            res.send({ message: "no such data" });
         }
-        else if(err){
+        else if (err) {
             console.log(err);
         }
-        else{
-            res.send({Message:"doc deleted successfully"});
+        else {
+            res.send({ Message: "doc deleted successfully" });
         }
     })
 }
 
 
 exports.update = (req, res) => {
-	// Validate Request
-    if(!req.body) {
-        return res.status(400).send({
+    if (!req.body) {
+        return res.send({
             message: "Note content can not be empty"
         });
     }
 
-    // Find note and update it with the request body
-    users.user_model.findOneAndUpdate({'user_id':req.params.noteId}, {$set: req.body}, {new: true})
-    .then(note => {
-        if(!note) {
-            return res.status(404).send({
-                message: "Note not found with id " + req.params.noteId
-            });
+    users.user_model.findOneAndUpdate({ 'user_id': req.params.noteId }, { $set: req.body }, { new: true }, (err, response) => {
+        if (err) {
+            console.log(err);
         }
-        res.send(note);
-    }).catch(err => {
-        if(err.kind === 'ObjectId') {
-            return res.status(404).send({
-                message: "Note not found with id " + req.params.noteId
-            });                
+        else {
+            res.send(response);
         }
-        return res.status(500).send({
-            message: "Error updating note with id " + req.params.noteId
-        });
     });
-};
+}
