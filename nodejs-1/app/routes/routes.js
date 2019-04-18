@@ -6,14 +6,14 @@ module.exports=(app)=>{
     //user collection routes
     app.post('/users/post', users_coll.create);
     app.get('/users/read', users_coll.findAll);
-    app.delete('/users/:noteId', users_coll.deleteOne);
-    app.put('/users/put/:noteId', users_coll.update);
+    app.delete('/users/:id', users_coll.deleteOne);
+    app.put('/users/put/:id', users_coll.update);
 
     //jobs collection routes
     app.post('/jobs/post/:id',jobs_coll.create);
     app.get('/jobs/read', jobs_coll.findAll);
-    app.delete('/jobs/:noteId', jobs_coll.deleteOne);
-    app.put('/jobs/put/:noteId', jobs_coll.update);
+    app.delete('/jobs/:id', jobs_coll.deleteOne);
+    app.put('/jobs/put/:id', jobs_coll.update);
 
     //Apply collection routes
     app.post('/apply/post/:id', apply_coll.create);
