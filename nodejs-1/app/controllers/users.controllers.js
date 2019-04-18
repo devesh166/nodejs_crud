@@ -37,7 +37,7 @@ exports.findAll = (req, res) => {
 }
 
 exports.deleteOne = (req, res) => {
-    users.user_model.findOneAndDelete({ 'user_id': req.params.noteId }, (err, response) => {
+    users.user_model.findOneAndDelete({ 'user_id': req.params.id }, (err, response) => {
         if (!response) {
             res.send({ message: "no such data" });
         }
@@ -58,7 +58,7 @@ exports.update = (req, res) => {
         });
     }
 
-    users.user_model.findOneAndUpdate({ 'user_id': req.params.noteId }, { $set: req.body }, { new: true }, (err, response) => {
+    users.user_model.findOneAndUpdate({ 'user_id': req.params.id }, { $set: req.body }, { new: true }, (err, response) => {
         if (err) {
             console.log(err);
         }
