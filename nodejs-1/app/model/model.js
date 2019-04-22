@@ -1,32 +1,36 @@
 var mongoose = require('mongoose');
 
 var user_schema = mongoose.Schema({
-    role: { type: Number, require: true },
-    user_id: { type: Number, require: true, },
-    name: { type: String, require: true },
+    role: { type: Number, required: true },
+    user_id: { type: Number, required: true, },
+    name: { type: String, required: true },
     email: { type: String },
     loc: {
-        type: { type: Number },
+        type: { type: String },
         coordinates: []
     }
 }, { versionKey: false });
+user_schema.index({ loc: "2dsphere" });
+
 
 var job_schema = mongoose.Schema({
-    job_id: { type: Number, require: true },
-    job_des: { type: String, require: true },
-    company_name: { type: String, require: true },
+    job_id: { type: Number, required: true },
+    job_des: { type: String, required: true },
+    company_name: { type: String, required: true },
     loc: {
-        type: { type: Number },
+        type: { type: String },
         coordinates: []
     }
 }, { versionKey: false });
+job_schema.index({ loc: "2dsphere" });
 
 var Apply_schema = mongoose.Schema({
-    user_id: { type: Number, require: true },
-    job_id: { type: Number, require: true },
-    company_name:{type:String, require:true},
+    user_id: { type: Number, required: true },
+    job_id: { type: Number, required: true },
+    company_name:{type:String, required:true},
     job_status: { type: Number}
 }, { versionKey: false });
+
 module.exports = {
     user_model: mongoose.model('user_types', user_schema),
     jobs_model: mongoose.model('Jobs', job_schema),

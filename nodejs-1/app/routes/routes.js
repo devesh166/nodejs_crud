@@ -16,7 +16,8 @@ module.exports=(app)=>{
     app.put('/jobs/put/:id', jobs_coll.update);
 
     //Apply collection routes
-    app.post('/apply/post/:id', apply_coll.create);
+    app.post('/apply/:id/:job_id',apply_coll.create);
+    app.get('/apply/get/:id', apply_coll.distance);
     app.get('/apply/:company_name', apply_coll.findAll);
     app.get('/apply/:company_name/:user_id', apply_coll.find_user);
     app.put('/apply/:company_id/:user', apply_coll.update);
